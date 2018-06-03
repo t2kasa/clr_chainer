@@ -55,7 +55,7 @@ class CLR(extension.Extension):
             the main optimizer of the trainer is used.
     """
 
-    _policy_choices = {
+    policy_choices = {
         'triangular': _compute_next_value_triangular,
         'triangular2': _compute_next_value_triangular2,
         'exp_range': _compute_next_value_exp_range
@@ -70,9 +70,9 @@ class CLR(extension.Extension):
         self._t = 0
         self._last_value = None
 
-        if policy not in self._policy_choices.keys():
+        if policy not in self.policy_choices.keys():
             raise ValueError('not supported policy.')
-        self._policy_func = self._policy_choices[policy]
+        self._policy_func = self.policy_choices[policy]
         if policy == 'exp_range':
             gamma = gamma or _default_gamma
             self._policy_func = functools.partial(self._policy_func,
