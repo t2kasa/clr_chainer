@@ -37,6 +37,11 @@ def _compute_next_value_exp_range(t, value_range, step_size,
 class CLR(extension.Extension):
     """Trainer extension to apply cyclical learning rate an optimizer attribute.
 
+    This Cyclical learning Rate (CLR) is proposed in [#]_.
+
+     .. [#] Smith, Leslie. Cyclical Learning Rates for Training Neural Networks.
+        WACV 2017.
+
     Args:
         attr (str): Name of the attribute to apply.
         value_range (tuple of float): The first and last values of the
@@ -44,7 +49,8 @@ class CLR(extension.Extension):
         step_size (int): The number of iterations per half cycle.
         policy (str): Policy to apply. The choices are 'triangular',
             'triangular2' and 'exp_range'.
-        gamma (str): Base value for 'exp_range' policy.
+        gamma (str): Base value for 'exp_range' policy. If other policy is used,
+            This value is ignored.
         optimizer (~chainer.Optimizer): Target optimizer object. If it is None,
             the main optimizer of the trainer is used.
     """
